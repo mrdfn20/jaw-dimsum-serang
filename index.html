@@ -1,1242 +1,1327 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JAW Dimsum Serang - Street Food Berkualitas</title>
-    <meta name="description" content="JAW Dimsum Serang - Street food berkualitas sejak 2023. Dimsum, cireng, bakso bakar, dan macaroni schotel. Buka setiap hari 13.00-22.00">
-    <meta name="keywords" content="dimsum, serang, street food, makanan, jajanan, jaw dimsum">
-    
+    <meta
+      name="description"
+      content="JAW Dimsum Serang - Street food berkualitas sejak 2023. Dimsum, cireng, bakso bakar, dan macaroni schotel. Buka setiap hari 13.00-22.00"
+    />
+    <meta
+      name="keywords"
+      content="dimsum, serang, street food, makanan, jajanan, jaw dimsum"
+    />
+
     <style>
-        /* Reset & Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+      /* Reset & Base Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        overflow-x: hidden;
+      }
+
+      /* Color Variables */
+      :root {
+        --primary-white: #ffffff;
+        --primary-gold: #f4d03f;
+        --warm-orange: #ff8c42;
+        --warm-orange-light: #ffa366;
+        --warm-orange-dark: #e67329;
+        --text-dark: #2c2c2c;
+        --text-light: #666;
+        --shadow: rgba(0, 0, 0, 0.1);
+      }
+
+      /* Header & Navigation */
+      .header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: var(--primary-white);
+        box-shadow: 0 2px 20px var(--shadow);
+        z-index: 1000;
+        transition: all 0.3s ease;
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 70px;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: var(--warm-orange);
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .logo:hover {
+        color: var(--warm-orange-dark);
+      }
+
+      .nav-menu {
+        display: flex;
+        list-style: none;
+        gap: 30px;
+      }
+
+      .nav-menu a {
+        text-decoration: none;
+        color: var(--text-dark);
+        font-weight: 500;
+        transition: color 0.3s ease;
+        position: relative;
+      }
+
+      .nav-menu a:hover {
+        color: var(--warm-orange);
+      }
+
+      .nav-menu a::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -5px;
+        left: 0;
+        background: var(--warm-orange);
+        transition: width 0.3s ease;
+      }
+
+      .nav-menu a:hover::after {
+        width: 100%;
+      }
+
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 4px;
+      }
+
+      .hamburger span {
+        width: 25px;
+        height: 3px;
+        background: var(--warm-orange);
+        transition: all 0.3s ease;
+      }
+
+      /* Hero Section */
+      .hero {
+        height: 100vh;
+        background: linear-gradient(
+          135deg,
+          var(--warm-orange) 0%,
+          var(--warm-orange-light) 100%
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></svg>')
+          repeat;
+        animation: float 20s infinite linear;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateX(-50px) translateY(-50px);
         }
-        
-        html {
-            scroll-behavior: smooth;
+        100% {
+          transform: translateX(50px) translateY(50px);
         }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            overflow-x: hidden;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        padding: 0 20px;
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+        margin-bottom: 20px;
+        opacity: 0;
+        animation: fadeInUp 1s ease forwards;
+      }
+
+      .hero p {
+        font-size: 1.3rem;
+        margin-bottom: 30px;
+        opacity: 0;
+        animation: fadeInUp 1s ease 0.3s forwards;
+      }
+
+      .cta-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+        opacity: 0;
+        animation: fadeInUp 1s ease 0.6s forwards;
+      }
+
+      .btn {
+        padding: 15px 30px;
+        border: none;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .btn-primary {
+        background: var(--primary-white);
+        color: var(--warm-orange);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn-secondary {
+        background: transparent;
+        color: white;
+        border: 2px solid white;
+      }
+
+      .btn-secondary:hover {
+        background: white;
+        color: var(--warm-orange);
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(50px);
         }
-        
-        /* Color Variables */
-        :root {
-            --primary-white: #FFFFFF;
-            --primary-gold: #F4D03F;
-            --warm-orange: #FF8C42;
-            --warm-orange-light: #FFA366;
-            --warm-orange-dark: #E67329;
-            --text-dark: #2C2C2C;
-            --text-light: #666;
-            --shadow: rgba(0, 0, 0, 0.1);
+        to {
+          opacity: 1;
+          transform: translateY(0);
         }
-        
-        /* Header & Navigation */
-        .header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: var(--primary-white);
-            box-shadow: 0 2px 20px var(--shadow);
-            z-index: 1000;
-            transition: all 0.3s ease;
+      }
+
+      /* Section Styles */
+      .section {
+        padding: 80px 0;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        color: var(--text-dark);
+        margin-bottom: 20px;
+        position: relative;
+      }
+
+      .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 4px;
+        background: var(--warm-orange);
+        border-radius: 2px;
+      }
+
+      .section-subtitle {
+        text-align: center;
+        font-size: 1.2rem;
+        color: var(--text-light);
+        margin-bottom: 50px;
+      }
+
+      /* About Section */
+      .about {
+        background: var(--primary-white);
+      }
+
+      .about-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+        align-items: center;
+      }
+
+      .about-text {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: var(--text-light);
+      }
+
+      .about-text h3 {
+        color: var(--warm-orange);
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+      }
+
+      .about-info {
+        background: linear-gradient(
+          135deg,
+          var(--primary-gold),
+          var(--warm-orange-light)
+        );
+        padding: 40px;
+        border-radius: 20px;
+        text-align: center;
+        color: white;
+      }
+
+      .about-info h3 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+      }
+
+      .operating-hours {
+        font-size: 1.3rem;
+        font-weight: 600;
+      }
+
+      /* Menu Section */
+      .menu {
+        background: #f8f8f8;
+      }
+
+      .menu-filters {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 40px;
+        flex-wrap: wrap;
+      }
+
+      .filter-btn {
+        padding: 12px 25px;
+        border: 2px solid var(--warm-orange);
+        background: transparent;
+        color: var(--warm-orange);
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 600;
+      }
+
+      .filter-btn.active,
+      .filter-btn:hover {
+        background: var(--warm-orange);
+        color: white;
+      }
+
+      .menu-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+      }
+
+      .menu-card {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px var(--shadow);
+        transition: all 0.3s ease;
+        opacity: 0;
+        animation: fadeIn 0.6s ease forwards;
+      }
+
+      .menu-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+      }
+
+      .menu-card-image {
+        height: 200px;
+        background: var(--primary-gold);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--warm-orange);
+        font-size: 3rem;
+        font-weight: bold;
+      }
+
+      .menu-card-content {
+        padding: 25px;
+      }
+
+      .menu-card h3 {
+        font-size: 1.3rem;
+        color: var(--text-dark);
+        margin-bottom: 10px;
+      }
+
+      .menu-card-prices {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+      }
+
+      .price-tag {
+        background: var(--warm-orange);
+        color: white;
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
         }
-        
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 70px;
+        to {
+          opacity: 1;
+          transform: translateY(0);
         }
-        
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--warm-orange);
-            text-decoration: none;
-            transition: color 0.3s ease;
+      }
+
+      /* Gallery Section */
+      .gallery {
+        background: var(--primary-white);
+      }
+
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+      }
+
+      .gallery-item {
+        height: 250px;
+        background: var(--primary-gold);
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--warm-orange);
+        font-size: 2rem;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .gallery-item:hover {
+        transform: scale(1.05);
+      }
+
+      /* Order Section */
+      .order {
+        background: linear-gradient(
+          135deg,
+          var(--warm-orange),
+          var(--warm-orange-dark)
+        );
+        color: white;
+        text-align: center;
+      }
+
+      .order .section-title,
+      .order .section-subtitle {
+        color: white;
+      }
+
+      .order-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .order-btn {
+        padding: 15px 30px;
+        background: white;
+        color: var(--warm-orange);
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .order-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Location Section */
+      .location {
+        background: #f8f8f8;
+      }
+
+      .location-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+        align-items: center;
+      }
+
+      .location-info h3 {
+        color: var(--warm-orange);
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+      }
+
+      .location-info p {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: var(--text-light);
+        margin-bottom: 15px;
+      }
+
+      .map-container {
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px var(--shadow);
+      }
+
+      .map-placeholder {
+        height: 300px;
+        background: var(--primary-gold);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--warm-orange);
+        font-size: 1.2rem;
+        text-align: center;
+      }
+
+      /* Contact Section */
+      .contact {
+        background: var(--primary-white);
+      }
+
+      .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+      }
+
+      .contact-card {
+        text-align: center;
+        padding: 30px;
+        border-radius: 15px;
+        background: linear-gradient(
+          135deg,
+          var(--primary-gold),
+          var(--warm-orange-light)
+        );
+        color: white;
+        transition: all 0.3s ease;
+      }
+
+      .contact-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .contact-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+      }
+
+      .contact-card p {
+        font-size: 1.1rem;
+      }
+
+      .contact-card a {
+        color: white;
+        text-decoration: none;
+      }
+
+      /* Footer */
+      .footer {
+        background: var(--text-dark);
+        color: white;
+        text-align: center;
+        padding: 40px 0;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin-bottom: 30px;
+      }
+
+      .footer-section h3 {
+        color: var(--warm-orange);
+        margin-bottom: 15px;
+      }
+
+      .footer-section a {
+        color: #ccc;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer-section a:hover {
+        color: var(--warm-orange);
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 20px;
+      }
+
+      .social-links a {
+        width: 40px;
+        height: 40px;
+        background: var(--warm-orange);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .social-links a:hover {
+        transform: translateY(-3px);
+        background: var(--warm-orange-dark);
+      }
+
+      /* WhatsApp Floating Button */
+      .whatsapp-float {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 60px;
+        height: 60px;
+        background: #25d366;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        text-decoration: none;
+        z-index: 1000;
+        transition: all 0.3s ease;
+        animation: pulse 2s infinite;
+      }
+
+      .whatsapp-float:hover {
+        transform: scale(1.1);
+        background: #20b358;
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
         }
-        
-        .logo:hover {
-            color: var(--warm-orange-dark);
+        70% {
+          box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
         }
-        
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 30px;
+        100% {
+          box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
         }
-        
-        .nav-menu a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-        
-        .nav-menu a:hover {
-            color: var(--warm-orange);
-        }
-        
-        .nav-menu a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background: var(--warm-orange);
-            transition: width 0.3s ease;
-        }
-        
-        .nav-menu a:hover::after {
-            width: 100%;
-        }
-        
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
         .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 4px;
+          display: flex;
         }
-        
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background: var(--warm-orange);
-            transition: all 0.3s ease;
+
+        .nav-menu {
+          position: fixed;
+          top: 70px;
+          left: -100%;
+          width: 100%;
+          height: calc(100vh - 70px);
+          background: white;
+          flex-direction: column;
+          justify-content: start;
+          align-items: center;
+          padding-top: 50px;
+          gap: 30px;
+          transition: left 0.3s ease;
         }
-        
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            background: linear-gradient(135deg, var(--warm-orange) 0%, var(--warm-orange-light) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            position: relative;
-            overflow: hidden;
+
+        .nav-menu.active {
+          left: 0;
         }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
-            animation: float 20s infinite linear;
-        }
-        
-        @keyframes float {
-            0% { transform: translateX(-50px) translateY(-50px); }
-            100% { transform: translateX(50px) translateY(50px); }
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
-            padding: 0 20px;
-        }
-        
+
         .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            opacity: 0;
-            animation: fadeInUp 1s ease forwards;
+          font-size: 2.5rem;
         }
-        
+
         .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 30px;
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.3s forwards;
+          font-size: 1.1rem;
         }
-        
+
         .cta-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.6s forwards;
+          flex-direction: column;
+          align-items: center;
         }
-        
-        .btn {
-            padding: 15px 30px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-        
-        .btn-primary {
-            background: var(--primary-white);
-            color: var(--warm-orange);
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-        
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-        }
-        
-        .btn-secondary:hover {
-            background: white;
-            color: var(--warm-orange);
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        /* Section Styles */
-        .section {
-            padding: 80px 0;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            color: var(--text-dark);
-            margin-bottom: 20px;
-            position: relative;
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
-            background: var(--warm-orange);
-            border-radius: 2px;
-        }
-        
-        .section-subtitle {
-            text-align: center;
-            font-size: 1.2rem;
-            color: var(--text-light);
-            margin-bottom: 50px;
-        }
-        
-        /* About Section */
-        .about {
-            background: var(--primary-white);
-        }
-        
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-        
-        .about-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: var(--text-light);
-        }
-        
-        .about-text h3 {
-            color: var(--warm-orange);
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-        
-        .about-info {
-            background: linear-gradient(135deg, var(--primary-gold), var(--warm-orange-light));
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            color: white;
-        }
-        
-        .about-info h3 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-        }
-        
-        .operating-hours {
-            font-size: 1.3rem;
-            font-weight: 600;
-        }
-        
-        /* Menu Section */
-        .menu {
-            background: #f8f8f8;
-        }
-        
-        .menu-filters {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-        
-        .filter-btn {
-            padding: 12px 25px;
-            border: 2px solid var(--warm-orange);
-            background: transparent;
-            color: var(--warm-orange);
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-        }
-        
-        .filter-btn.active,
-        .filter-btn:hover {
-            background: var(--warm-orange);
-            color: white;
-        }
-        
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .menu-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px var(--shadow);
-            transition: all 0.3s ease;
-            opacity: 0;
-            animation: fadeIn 0.6s ease forwards;
-        }
-        
-        .menu-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-        }
-        
-        .menu-card-image {
-            height: 200px;
-            background: var(--primary-gold);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--warm-orange);
-            font-size: 3rem;
-            font-weight: bold;
-        }
-        
-        .menu-card-content {
-            padding: 25px;
-        }
-        
-        .menu-card h3 {
-            font-size: 1.3rem;
-            color: var(--text-dark);
-            margin-bottom: 10px;
-        }
-        
-        .menu-card-prices {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-        
-        .price-tag {
-            background: var(--warm-orange);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* Gallery Section */
-        .gallery {
-            background: var(--primary-white);
-        }
-        
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        
-        .gallery-item {
-            height: 250px;
-            background: var(--primary-gold);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--warm-orange);
-            font-size: 2rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .gallery-item:hover {
-            transform: scale(1.05);
-        }
-        
-        /* Order Section */
-        .order {
-            background: linear-gradient(135deg, var(--warm-orange), var(--warm-orange-dark));
-            color: white;
-            text-align: center;
-        }
-        
-        .order .section-title,
-        .order .section-subtitle {
-            color: white;
-        }
-        
-        .order-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        
-        .order-btn {
-            padding: 15px 30px;
-            background: white;
-            color: var(--warm-orange);
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .order-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-        
-        /* Location Section */
-        .location {
-            background: #f8f8f8;
-        }
-        
+
+        .about-content,
         .location-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
+          grid-template-columns: 1fr;
+          gap: 30px;
         }
-        
-        .location-info h3 {
-            color: var(--warm-orange);
-            font-size: 1.5rem;
-            margin-bottom: 15px;
+
+        .menu-grid {
+          grid-template-columns: 1fr;
         }
-        
-        .location-info p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: var(--text-light);
-            margin-bottom: 15px;
+
+        .order-buttons {
+          flex-direction: column;
+          align-items: center;
         }
-        
-        .map-container {
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px var(--shadow);
+
+        .section-title {
+          font-size: 2rem;
         }
-        
-        .map-placeholder {
-            height: 300px;
-            background: var(--primary-gold);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--warm-orange);
-            font-size: 1.2rem;
-            text-align: center;
-        }
-        
-        /* Contact Section */
-        .contact {
-            background: var(--primary-white);
-        }
-        
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-        
-        .contact-card {
-            text-align: center;
-            padding: 30px;
-            border-radius: 15px;
-            background: linear-gradient(135deg, var(--primary-gold), var(--warm-orange-light));
-            color: white;
-            transition: all 0.3s ease;
-        }
-        
-        .contact-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .contact-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-        
-        .contact-card p {
-            font-size: 1.1rem;
-        }
-        
-        .contact-card a {
-            color: white;
-            text-decoration: none;
-        }
-        
-        /* Footer */
-        .footer {
-            background: var(--text-dark);
-            color: white;
-            text-align: center;
-            padding: 40px 0;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-        
-        .footer-section h3 {
-            color: var(--warm-orange);
-            margin-bottom: 15px;
-        }
-        
-        .footer-section a {
-            color: #ccc;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        .footer-section a:hover {
-            color: var(--warm-orange);
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            background: var(--warm-orange);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .social-links a:hover {
-            transform: translateY(-3px);
-            background: var(--warm-orange-dark);
-        }
-        
-        /* WhatsApp Floating Button */
+
         .whatsapp-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            background: #25D366;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            text-decoration: none;
-            z-index: 1000;
-            transition: all 0.3s ease;
-            animation: pulse 2s infinite;
+          bottom: 20px;
+          right: 20px;
+          width: 50px;
+          height: 50px;
+          font-size: 1.2rem;
         }
-        
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-            background: #20b358;
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          padding: 0 15px;
         }
-        
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+
+        .hero h1 {
+          font-size: 2rem;
         }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .hamburger {
-                display: flex;
-            }
-            
-            .nav-menu {
-                position: fixed;
-                top: 70px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 70px);
-                background: white;
-                flex-direction: column;
-                justify-content: start;
-                align-items: center;
-                padding-top: 50px;
-                gap: 30px;
-                transition: left 0.3s ease;
-            }
-            
-            .nav-menu.active {
-                left: 0;
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .about-content,
-            .location-content {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            
-            .menu-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .order-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .whatsapp-float {
-                bottom: 20px;
-                right: 20px;
-                width: 50px;
-                height: 50px;
-                font-size: 1.2rem;
-            }
+
+        .section {
+          padding: 60px 0;
         }
-        
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 15px;
-            }
-            
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .section {
-                padding: 60px 0;
-            }
-            
-            .menu-card {
-                margin: 0 10px;
-            }
-            
-            .nav-container {
-                padding: 0 15px;
-            }
+
+        .menu-card {
+          margin: 0 10px;
         }
-        
-        /* Animation Classes for Scroll */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.6s ease;
+
+        .nav-container {
+          padding: 0 15px;
         }
-        
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+      }
+
+      /* Animation Classes for Scroll */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 0.6s ease;
+      }
+
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Header -->
     <header class="header">
-        <nav class="nav-container">
-            <a href="#home" class="logo">JAW Dimsum Serang</a>
-            <ul class="nav-menu">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#menu">Menu</a></li>
-                <li><a href="#gallery">Gallery</a></li>
-                <li><a href="#order">Order</a></li>
-                <li><a href="#location">Location</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </nav>
+      <nav class="nav-container">
+        <a href="#home" class="logo">JAW Dimsum Serang</a>
+        <ul class="nav-menu">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#order">Order</a></li>
+          <li><a href="#location">Location</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </nav>
     </header>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>JAW Dimsum Serang</h1>
-            <p>Street Food Berkualitas dengan Cita Rasa Istimewa</p>
-            <div class="cta-buttons">
-                <a href="#order" class="btn btn-primary">Pesan Sekarang</a>
-                <a href="#menu" class="btn btn-secondary">Lihat Menu</a>
-            </div>
+      <div class="hero-content">
+        <h1>JAW Dimsum Serang</h1>
+        <p>Street Food Berkualitas dengan Cita Rasa Istimewa</p>
+        <div class="cta-buttons">
+          <a href="#order" class="btn btn-primary">Pesan Sekarang</a>
+          <a href="#menu" class="btn btn-secondary">Lihat Menu</a>
         </div>
+      </div>
     </section>
 
     <!-- About Section -->
     <section id="about" class="section about">
-        <div class="container">
-            <h2 class="section-title fade-in">Tentang Kami</h2>
-            <p class="section-subtitle fade-in">Cerita JAW Dimsum Serang</p>
-            <div class="about-content">
-                <div class="about-text fade-in">
-                    <h3>Perjalanan Dimulai</h3>
-                    <p>Dibangun oleh 2 wanita hebat sejak 2023, JAW Dimsum telah melewati berbagai tantangan bisnis dan terus berkembang melayani street food berkualitas di Serang.</p>
-                    <p>Kami bangga menjadi gerai fisik jajanan kaki lima yang mengutamakan kualitas dan cita rasa istimewa untuk setiap pelanggan.</p>
-                </div>
-                <div class="about-info fade-in">
-                    <h3>Jam Operasional</h3>
-                    <div class="operating-hours">
-                        Setiap Hari<br>
-                        13.00 - 22.00 WIB
-                    </div>
-                </div>
+      <div class="container">
+        <h2 class="section-title fade-in">Tentang Kami</h2>
+        <p class="section-subtitle fade-in">Cerita JAW Dimsum Serang</p>
+        <div class="about-content">
+          <div class="about-text fade-in">
+            <h3>Perjalanan Dimulai</h3>
+            <p>
+              Dibangun oleh 2 wanita hebat sejak 2023, JAW Dimsum telah melewati
+              berbagai tantangan bisnis dan terus berkembang melayani street
+              food berkualitas di Serang.
+            </p>
+            <p>
+              Kami bangga menjadi gerai fisik jajanan kaki lima yang
+              mengutamakan kualitas dan cita rasa istimewa untuk setiap
+              pelanggan.
+            </p>
+          </div>
+          <div class="about-info fade-in">
+            <h3>Jam Operasional</h3>
+            <div class="operating-hours">
+              Setiap Hari<br />
+              13.00 - 22.00 WIB
             </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Menu Section -->
     <section id="menu" class="section menu">
-        <div class="container">
-            <h2 class="section-title fade-in">Menu Favorit</h2>
-            <p class="section-subtitle fade-in">Pilihan dimsum dan snacks terlezat</p>
-            
-            <div class="menu-filters fade-in">
-                <button class="filter-btn active" data-filter="all">Semua</button>
-                <button class="filter-btn" data-filter="dimsum">Dimsum</button>
-                <button class="filter-btn" data-filter="platter">Platter</button>
-                <button class="filter-btn" data-filter="snacks">Snacks</button>
-            </div>
+      <div class="container">
+        <h2 class="section-title fade-in">Menu Favorit</h2>
+        <p class="section-subtitle fade-in">
+          Pilihan dimsum dan snacks terlezat
+        </p>
 
-            <div class="menu-grid">
-                <!-- Dimsum Items -->
-                <div class="menu-card" data-category="dimsum">
-                    <div class="menu-card-image">🥟</div>
-                    <div class="menu-card-content">
-                        <h3>Dimsum Ori</h3>
-                        <div class="menu-card-prices">
-                            <span class="price-tag">4pcs - Rp 15.000</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="menu-card" data-category="dimsum">
-                    <div class="menu-card-image">🧀</div>
-                    <div class="menu-card-content">
-                        <h3>Dimsum Moza Parut</h3>
-                        <div class="menu-card-prices">
-                            <span class="price-tag">4pcs - Rp 18.000</span>
-                            <span class="price-tag">6pcs - Rp 25.000</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="menu-card" data-category="dimsum">
-                    <div class="menu-card-image">🔥</div>
-                    <div class="menu-card-content">
-                        <h3>Dimsum Bakar Ori</h3>
-                        <div class="menu-card-prices">
-                            <span class="price-tag">4pcs - Rp 17.000</span>
-                            <span class="price-tag">6pcs - Rp 24.000</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="menu-card" data-category="dimsum">
-                    <div class="menu-card-image">🍤</div>
-                    <div class="menu-card-content">
-                        <h3>Dimsum Mentai</h3>
-                        <div class="menu-card-prices">
-                            <span class="price-tag">4pcs - Rp 20.000</span>
-                            <span class="price-tag">6pcs - Rp 28.000</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="menu-card" data-category="dimsum">
-                    <div class="menu-card-image">🔥</div>
-                    <div class="menu-card-content">
-                        <h3>Dimsum Bakar Mentai</h3>
-                        <div class="menu-card-prices">
-                            <span class="price-tag">4pcs - Rp 23.000</span>
-                            <span class="price-tag">6pcs - Rp 33.000</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="menu-card" data-category="dimsum">
-                    <div class="menu-card-image">🧀</div>
-                    <div class="menu-card-content">
-                        <h3>Mentai Moza Parut</h3>
-                        <div class="menu-card-prices">
-                            <span class="price-tag">4pcs - Rp 25.000</span>
-                            <span class="price-tag">6pcs - Rp 36.000</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="menu-card" data-category="dimsum">
-                    <div class="menu-card-image">🧀</div>
-                    <div class="menu-card-content">
-                        <h3>Mentai Moza Slice</h3>
-                        <div class="menu-card-prices">
-                            <span class="price-tag">4pcs - Rp 26.000</span>
-                            <span class="price-tag">6pcs - Rp 36.000</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="menu-card" data-category="dimsum">
-                    <div class="menu-card-image">🧀</div>
-                    <div class="menu-card-content">
-                        <h3>Dimsum Saus Keju</h3>
-                        <div class="menu-card-prices">
-                            <span class="price-tag">4pcs - Rp 17.000</span>
-                            <span class="price-tag">6pcs - Rp 25.000</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="menu-card" data-category="dimsum">
-                    <div class="menu-card-image">🌶️</div>
-                    <div class="menu-card-content">
-                        <h3>Dimsum Spicy Lava</h3>
-                        <div class="menu-card-prices">
-                            <span class="price-tag">4pcs - Rp 17.000</span>
-                            <span class="price-tag">6pcs - Rp 25.000</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="menu-card" data-category="dimsum">
-                    <div class="menu-card-image">🥄</div>
-                    <div class="menu-card-content">
-                        <h3>Dimsum Saus Tartar</h3>
-                        <div class="menu-card-prices">
-                            <span class="price-tag">4pcs - Rp 20.000</span>
-                            <span class="price-tag">6pcs - Rp 25.000</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="menu-card" data-category="dimsum">
-                    <div class="menu-card-image">🍮</div>
-                    <div class="menu-card-content">
-                        <h3>Dimsum Saus Brulee Ori</h3>
-                        <div class="menu-card-prices">
-                            <span class="price-tag">4pcs - Rp 23.000</span>
-                            <span class="price-tag">6pcs - Rp 30.000</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="menu-card" data-category="dimsum">
-                    <div class="menu-card-image">🍮</div>
-                    <div class="menu-card-content">
-                        <h3>Dimsum Saus Brulee Spicy</h3>
-                        <div class="menu-card-prices">
-                            <span class="price-tag">4pcs - Rp 25.000</span>
-                            <span class="price-tag">6pcs - Rp 32.000</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Platter Items -->
-                <div class="menu-card" data-category="platter">
-                    <div class="menu-card-image">🍽️</div>
-                    <div class="menu-card-content">
-                        <h3>Mix Platter isi 6</h3>
-                        <div class="menu-card-prices">
-                            <span class="price-tag">Harga menyesuaikan varian</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="menu-card" data-category="platter">
-                    <div class="menu-card-image">🍽️</div>
-                    <div class="menu-card-content">
-                        <h3>Mix Platter isi 16</h3>
-                        <div class="menu-card-prices">
-                            <span class="price-tag">Harga menyesuaikan varian</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Snacks Items -->
-                <div class="menu-card" data-category="snacks">
-                    <div class="menu-card-image">🍡</div>
-                    <div class="menu-card-content">
-                        <h3>Cireng Isi</h3>
-                        <div class="menu-card-prices">
-                            <span class="price-tag">4pcs - Rp 10.000</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="menu-card" data-category="snacks">
-                    <div class="menu-card-image">🍢</div>
-                    <div class="menu-card-content">
-                        <h3>Bakso Bakar</h3>
-                        <div class="menu-card-prices">
-                            <span class="price-tag">3 Tusuk - Rp 10.000</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="menu-card" data-category="snacks">
-                    <div class="menu-card-image">🧀</div>
-                    <div class="menu-card-content">
-                        <h3>Macaroni Schotel</h3>
-                        <div class="menu-card-prices">
-                            <span class="price-tag">Kecil - Rp 20.000</span>
-                            <span class="price-tag">Sedang - Rp 27.000</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="menu-filters fade-in">
+          <button class="filter-btn active" data-filter="all">Semua</button>
+          <button class="filter-btn" data-filter="dimsum">Dimsum</button>
+          <button class="filter-btn" data-filter="platter">Platter</button>
+          <button class="filter-btn" data-filter="snacks">Snacks</button>
         </div>
+
+        <div class="menu-grid">
+          <!-- Dimsum Items -->
+          <div class="menu-card" data-category="dimsum">
+            <div class="menu-card-image">🥟</div>
+            <div class="menu-card-content">
+              <h3>Dimsum Ori</h3>
+              <div class="menu-card-prices">
+                <span class="price-tag">4pcs - Rp 15.000</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-card" data-category="dimsum">
+            <div class="menu-card-image">🧀</div>
+            <div class="menu-card-content">
+              <h3>Dimsum Moza Parut</h3>
+              <div class="menu-card-prices">
+                <span class="price-tag">4pcs - Rp 18.000</span>
+                <span class="price-tag">6pcs - Rp 25.000</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-card" data-category="dimsum">
+            <div class="menu-card-image">🔥</div>
+            <div class="menu-card-content">
+              <h3>Dimsum Bakar Ori</h3>
+              <div class="menu-card-prices">
+                <span class="price-tag">4pcs - Rp 17.000</span>
+                <span class="price-tag">6pcs - Rp 24.000</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-card" data-category="dimsum">
+            <div class="menu-card-image">🍤</div>
+            <div class="menu-card-content">
+              <h3>Dimsum Mentai</h3>
+              <div class="menu-card-prices">
+                <span class="price-tag">4pcs - Rp 20.000</span>
+                <span class="price-tag">6pcs - Rp 28.000</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-card" data-category="dimsum">
+            <div class="menu-card-image">🔥</div>
+            <div class="menu-card-content">
+              <h3>Dimsum Bakar Mentai</h3>
+              <div class="menu-card-prices">
+                <span class="price-tag">4pcs - Rp 23.000</span>
+                <span class="price-tag">6pcs - Rp 33.000</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-card" data-category="dimsum">
+            <div class="menu-card-image">🧀</div>
+            <div class="menu-card-content">
+              <h3>Mentai Moza Parut</h3>
+              <div class="menu-card-prices">
+                <span class="price-tag">4pcs - Rp 25.000</span>
+                <span class="price-tag">6pcs - Rp 36.000</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-card" data-category="dimsum">
+            <div class="menu-card-image">🧀</div>
+            <div class="menu-card-content">
+              <h3>Mentai Moza Slice</h3>
+              <div class="menu-card-prices">
+                <span class="price-tag">4pcs - Rp 26.000</span>
+                <span class="price-tag">6pcs - Rp 36.000</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-card" data-category="dimsum">
+            <div class="menu-card-image">🧀</div>
+            <div class="menu-card-content">
+              <h3>Dimsum Saus Keju</h3>
+              <div class="menu-card-prices">
+                <span class="price-tag">4pcs - Rp 17.000</span>
+                <span class="price-tag">6pcs - Rp 25.000</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-card" data-category="dimsum">
+            <div class="menu-card-image">🌶️</div>
+            <div class="menu-card-content">
+              <h3>Dimsum Spicy Lava</h3>
+              <div class="menu-card-prices">
+                <span class="price-tag">4pcs - Rp 17.000</span>
+                <span class="price-tag">6pcs - Rp 25.000</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-card" data-category="dimsum">
+            <div class="menu-card-image">🥄</div>
+            <div class="menu-card-content">
+              <h3>Dimsum Saus Tartar</h3>
+              <div class="menu-card-prices">
+                <span class="price-tag">4pcs - Rp 20.000</span>
+                <span class="price-tag">6pcs - Rp 25.000</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-card" data-category="dimsum">
+            <div class="menu-card-image">🍮</div>
+            <div class="menu-card-content">
+              <h3>Dimsum Saus Brulee Ori</h3>
+              <div class="menu-card-prices">
+                <span class="price-tag">4pcs - Rp 23.000</span>
+                <span class="price-tag">6pcs - Rp 30.000</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-card" data-category="dimsum">
+            <div class="menu-card-image">🍮</div>
+            <div class="menu-card-content">
+              <h3>Dimsum Saus Brulee Spicy</h3>
+              <div class="menu-card-prices">
+                <span class="price-tag">4pcs - Rp 25.000</span>
+                <span class="price-tag">6pcs - Rp 32.000</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Platter Items -->
+          <div class="menu-card" data-category="platter">
+            <div class="menu-card-image">🍽️</div>
+            <div class="menu-card-content">
+              <h3>Mix Platter isi 6</h3>
+              <div class="menu-card-prices">
+                <span class="price-tag">Harga menyesuaikan varian</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-card" data-category="platter">
+            <div class="menu-card-image">🍽️</div>
+            <div class="menu-card-content">
+              <h3>Mix Platter isi 16</h3>
+              <div class="menu-card-prices">
+                <span class="price-tag">Harga menyesuaikan varian</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Snacks Items -->
+          <div class="menu-card" data-category="snacks">
+            <div class="menu-card-image">🍡</div>
+            <div class="menu-card-content">
+              <h3>Cireng Isi</h3>
+              <div class="menu-card-prices">
+                <span class="price-tag">4pcs - Rp 10.000</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-card" data-category="snacks">
+            <div class="menu-card-image">🍢</div>
+            <div class="menu-card-content">
+              <h3>Bakso Bakar</h3>
+              <div class="menu-card-prices">
+                <span class="price-tag">3 Tusuk - Rp 10.000</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu-card" data-category="snacks">
+            <div class="menu-card-image">🧀</div>
+            <div class="menu-card-content">
+              <h3>Macaroni Schotel</h3>
+              <div class="menu-card-prices">
+                <span class="price-tag">Kecil - Rp 20.000</span>
+                <span class="price-tag">Sedang - Rp 27.000</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Gallery Section -->
     <section id="gallery" class="section gallery">
-        <div class="container">
-            <h2 class="section-title fade-in">Gallery</h2>
-            <p class="section-subtitle fade-in">Lihat kelezatan produk kami</p>
-            <div class="gallery-grid fade-in">
-                <div class="gallery-item">📸</div>
-                <div class="gallery-item">🥟</div>
-                <div class="gallery-item">🍽️</div>
-                <div class="gallery-item">🔥</div>
-                <div class="gallery-item">🧀</div>
-                <div class="gallery-item">🍤</div>
-            </div>
+      <div class="container">
+        <h2 class="section-title fade-in">Gallery</h2>
+        <p class="section-subtitle fade-in">Lihat kelezatan produk kami</p>
+        <div class="gallery-grid fade-in">
+          <div class="gallery-item">📸</div>
+          <div class="gallery-item">🥟</div>
+          <div class="gallery-item">🍽️</div>
+          <div class="gallery-item">🔥</div>
+          <div class="gallery-item">🧀</div>
+          <div class="gallery-item">🍤</div>
         </div>
+      </div>
     </section>
 
     <!-- Order Section -->
     <section id="order" class="section order">
-        <div class="container">
-            <h2 class="section-title fade-in">Pesan Sekarang</h2>
-            <p class="section-subtitle fade-in">Tersedia melalui platform online dan WhatsApp</p>
-            <div class="order-buttons fade-in">
-                <a href="#" class="order-btn">
-                    🍴 GoFood
-                </a>
-                <a href="#" class="order-btn">
-                    🚗 GrabFood
-                </a>
-                <a href="https://wa.me/6287863177362" class="order-btn" target="_blank">
-                    📱 WhatsApp
-                </a>
-            </div>
+      <div class="container">
+        <h2 class="section-title fade-in">Pesan Sekarang</h2>
+        <p class="section-subtitle fade-in">
+          Tersedia melalui platform online dan WhatsApp
+        </p>
+        <div class="order-buttons fade-in">
+          <a href="#" class="order-btn"> 🍴 GoFood </a>
+          <a href="#" class="order-btn"> 🚗 GrabFood </a>
+          <a
+            href="https://wa.me/6287863177362"
+            class="order-btn"
+            target="_blank"
+            rel="noopener"
+          >
+            📱 WhatsApp
+          </a>
         </div>
+      </div>
     </section>
 
     <!-- Location Section -->
     <section id="location" class="section location">
-        <div class="container">
-            <h2 class="section-title fade-in">Lokasi Kami</h2>
-            <p class="section-subtitle fade-in">Kunjungi gerai kami di Serang</p>
-            <div class="location-content">
-                <div class="location-info fade-in">
-                    <h3>Alamat Lengkap</h3>
-                    <p>Jl. Highland Park, Sumurpecung, Kec. Serang, Kota Serang, Banten 42118</p>
-                    <p><strong>Landmark:</strong> Depan Gapura Kota Serang Baru</p>
-                    <h3>Jam Operasional</h3>
-                    <p>Setiap Hari: 13.00 - 22.00 WIB</p>
-                </div>
-                <div class="map-container fade-in">
-                    <div class="map-placeholder">
-                        📍 Google Maps<br>
-                        Jl. Highland Park, Sumurpecung<br>
-                        Kec. Serang, Kota Serang, Banten
-                    </div>
-                </div>
+      <div class="container">
+        <h2 class="section-title fade-in">Lokasi Kami</h2>
+        <p class="section-subtitle fade-in">Kunjungi gerai kami di Serang</p>
+        <div class="location-content">
+          <div class="location-info fade-in">
+            <h3>Alamat Lengkap</h3>
+            <p>
+              Jl. Highland Park, Sumurpecung, Kec. Serang, Kota Serang, Banten
+              42118
+            </p>
+            <p><strong>Landmark:</strong> Depan Gapura Kota Serang Baru</p>
+            <h3>Jam Operasional</h3>
+            <p>Setiap Hari: 13.00 - 22.00 WIB</p>
+          </div>
+          <div class="map-container fade-in">
+            <div class="map-placeholder">
+              📍 Google Maps<br />
+              Jl. Highland Park, Sumurpecung<br />
+              Kec. Serang, Kota Serang, Banten
             </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Contact Section -->
     <section id="contact" class="section contact">
-        <div class="container">
-            <h2 class="section-title fade-in">Hubungi Kami</h2>
-            <p class="section-subtitle fade-in">Kami siap melayani Anda</p>
-            <div class="contact-grid fade-in">
-                <div class="contact-card">
-                    <h3>📱 WhatsApp</h3>
-                    <p><a href="https://wa.me/6287863177362" target="_blank">087863177362</a></p>
-                </div>
-                <div class="contact-card">
-                    <h3>📸 Instagram</h3>
-                    <p><a href="https://www.instagram.com/jajanan.jaw" target="_blank">@jajanan.jaw</a></p>
-                </div>
-                <div class="contact-card">
-                    <h3>⏰ Jam Buka</h3>
-                    <p>Setiap Hari<br>13.00 - 22.00 WIB</p>
-                </div>
-            </div>
+      <div class="container">
+        <h2 class="section-title fade-in">Hubungi Kami</h2>
+        <p class="section-subtitle fade-in">Kami siap melayani Anda</p>
+        <div class="contact-grid fade-in">
+          <div class="contact-card">
+            <h3>📱 WhatsApp</h3>
+            <p>
+              <a
+                href="https://wa.me/6287863177362"
+                target="_blank"
+                rel="noopener"
+                >087863177362</a
+              >
+            </p>
+          </div>
+          <div class="contact-card">
+            <h3>📸 Instagram</h3>
+            <p>
+              <a
+                href="https://www.instagram.com/jajanan.jaw"
+                target="_blank"
+                rel="noopener"
+                >@jajanan.jaw</a
+              >
+            </p>
+          </div>
+          <div class="contact-card">
+            <h3>⏰ Jam Buka</h3>
+            <p>Setiap Hari<br />13.00 - 22.00 WIB</p>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>JAW Dimsum Serang</h3>
-                    <p>Street food berkualitas dengan cita rasa istimewa sejak 2023</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <p><a href="#menu">Menu</a></p>
-                    <p><a href="#order">Order</a></p>
-                    <p><a href="#location">Location</a></p>
-                </div>
-                <div class="footer-section">
-                    <h3>Contact Info</h3>
-                    <p>WhatsApp: 087863177362</p>
-                    <p>Instagram: @jajanan.jaw</p>
-                </div>
-            </div>
-            <div class="social-links">
-                <a href="https://wa.me/6287863177362" target="_blank">📱</a>
-                <a href="https://www.instagram.com/jajanan.jaw" target="_blank">📸</a>
-            </div>
-            <p>&copy; 2025 JAW Dimsum Serang. All rights reserved.</p>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>JAW Dimsum Serang</h3>
+            <p>Street food berkualitas dengan cita rasa istimewa sejak 2023</p>
+          </div>
+          <div class="footer-section">
+            <h3>Quick Links</h3>
+            <p><a href="#menu">Menu</a></p>
+            <p><a href="#order">Order</a></p>
+            <p><a href="#location">Location</a></p>
+          </div>
+          <div class="footer-section">
+            <h3>Contact Info</h3>
+            <p>WhatsApp: 087863177362</p>
+            <p>Instagram: @jajanan.jaw</p>
+          </div>
         </div>
+        <div class="social-links">
+          <a href="https://wa.me/6287863177362" target="_blank" rel="noopener"
+            >📱</a
+          >
+          <a
+            href="https://www.instagram.com/jajanan.jaw"
+            target="_blank"
+            rel="noopener"
+            >📸</a
+          >
+        </div>
+        <p>&copy; 2025 JAW Dimsum Serang. All rights reserved.</p>
+      </div>
     </footer>
 
     <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/6287863177362" class="whatsapp-float" target="_blank">📱</a>
+    <a
+      href="https://wa.me/6287863177362"
+      class="whatsapp-float"
+      target="_blank"
+      rel="noopener"
+      >📱</a
+    >
 
     <script>
-        // Mobile Navigation Toggle
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-menu');
+      // Mobile Navigation Toggle
+      const hamburger = document.querySelector('.hamburger');
+      const navMenu = document.querySelector('.nav-menu');
 
-        hamburger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            hamburger.classList.toggle('active');
+      hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        hamburger.classList.toggle('active');
+      });
+
+      // Close mobile menu when clicking on a link
+      document.querySelectorAll('.nav-menu a').forEach((link) => {
+        link.addEventListener('click', () => {
+          navMenu.classList.remove('active');
+          hamburger.classList.remove('active');
         });
+      });
 
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('.nav-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                hamburger.classList.remove('active');
-            });
-        });
+      // Header scroll effect
+      window.addEventListener('scroll', () => {
+        const header = document.querySelector('.header');
+        if (window.scrollY > 100) {
+          header.style.background = 'rgba(255, 255, 255, 0.95)';
+          header.style.backdropFilter = 'blur(10px)';
+        } else {
+          header.style.background = '#FFFFFF';
+          header.style.backdropFilter = 'none';
+        }
+      });
 
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('.header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
-                header.style.backdropFilter = 'blur(10px)';
+      // Menu filter functionality
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const menuCards = document.querySelectorAll('.menu-card');
+
+      filterBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          // Remove active class from all buttons
+          filterBtns.forEach((b) => b.classList.remove('active'));
+          // Add active class to clicked button
+          btn.classList.add('active');
+
+          const filter = btn.getAttribute('data-filter');
+
+          menuCards.forEach((card) => {
+            if (
+              filter === 'all' ||
+              card.getAttribute('data-category') === filter
+            ) {
+              card.style.display = 'block';
+              card.style.animation = 'fadeIn 0.6s ease forwards';
             } else {
-                header.style.background = '#FFFFFF';
-                header.style.backdropFilter = 'none';
+              card.style.display = 'none';
             }
+          });
         });
+      });
 
-        // Menu filter functionality
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const menuCards = document.querySelectorAll('.menu-card');
+      // Scroll animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px',
+      };
 
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Remove active class from all buttons
-                filterBtns.forEach(b => b.classList.remove('active'));
-                // Add active class to clicked button
-                btn.classList.add('active');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, observerOptions);
 
-                const filter = btn.getAttribute('data-filter');
+      // Observe all fade-in elements
+      document.querySelectorAll('.fade-in').forEach((el) => {
+        observer.observe(el);
+      });
 
-                menuCards.forEach(card => {
-                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                        card.style.display = 'block';
-                        card.style.animation = 'fadeIn 0.6s ease forwards';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            const headerHeight = document.querySelector('.header').offsetHeight;
+            const targetPosition = target.offsetTop - headerHeight;
+
+            window.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth',
             });
+          }
         });
+      });
 
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+      // Add staggered animation to menu cards
+      const menuCardsAnimation = document.querySelectorAll('.menu-card');
+      menuCardsAnimation.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+      });
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        // Observe all fade-in elements
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
+      // Gallery lightbox effect (simple version)
+      document.querySelectorAll('.gallery-item').forEach((item) => {
+        item.addEventListener('click', () => {
+          item.style.transform = 'scale(1.2)';
+          setTimeout(() => {
+            item.style.transform = 'scale(1)';
+          }, 300);
         });
+      });
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const headerHeight = document.querySelector('.header').offsetHeight;
-                    const targetPosition = target.offsetTop - headerHeight;
-                    
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
+      // Loading animation for page
+      window.addEventListener('load', () => {
+        document.body.style.overflow = 'visible';
+      });
 
-        // Add staggered animation to menu cards
-        const menuCardsAnimation = document.querySelectorAll('.menu-card');
-        menuCardsAnimation.forEach((card, index) => {
-            card.style.animationDelay = `${index * 0.1}s`;
-        });
+      // WhatsApp floating button animation
+      const whatsappFloat = document.querySelector('.whatsapp-float');
 
-        // Gallery lightbox effect (simple version)
-        document.querySelectorAll('.gallery-item').forEach(item => {
-            item.addEventListener('click', () => {
-                item.style.transform = 'scale(1.2)';
-                setTimeout(() => {
-                    item.style.transform = 'scale(1)';
-                }, 300);
-            });
-        });
+      // Add click effect
+      whatsappFloat.addEventListener('click', function (e) {
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          this.style.transform = 'scale(1)';
+        }, 150);
+      });
 
-        // Loading animation for page
-        window.addEventListener('load', () => {
-            document.body.style.overflow = 'visible';
-        });
+      // Add parallax effect to hero
+      window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const hero = document.querySelector('.hero');
+        const heroContent = document.querySelector('.hero-content');
 
-        // WhatsApp floating button animation
-        const whatsappFloat = document.querySelector('.whatsapp-float');
-        
-        // Add click effect
-        whatsappFloat.addEventListener('click', function(e) {
-            this.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                this.style.transform = 'scale(1)';
-            }, 150);
-        });
+        if (hero && heroContent) {
+          hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+          heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
+        }
+      });
 
-        // Add parallax effect to hero
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero');
-            const heroContent = document.querySelector('.hero-content');
-            
-            if (hero && heroContent) {
-                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-                heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
-            }
-        });
-
-        // Add search functionality for menu
-        function createMenuSearch() {
-            const searchContainer = document.querySelector('.menu-filters');
-            const searchInput = document.createElement('input');
-            searchInput.type = 'text';
-            searchInput.placeholder = 'Cari menu...';
-            searchInput.style.cssText = `
+      // Add search functionality for menu
+      function createMenuSearch() {
+        const searchContainer = document.querySelector('.menu-filters');
+        const searchInput = document.createElement('input');
+        searchInput.type = 'text';
+        searchInput.placeholder = 'Cari menu...';
+        searchInput.style.cssText = `
                 padding: 12px 25px;
                 border: 2px solid var(--warm-orange);
                 border-radius: 25px;
@@ -1245,53 +1330,53 @@
                 font-size: 14px;
                 width: 200px;
             `;
-            
-            searchInput.addEventListener('input', (e) => {
-                const searchTerm = e.target.value.toLowerCase();
-                menuCards.forEach(card => {
-                    const menuName = card.querySelector('h3').textContent.toLowerCase();
-                    if (menuName.includes(searchTerm)) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            });
-            
-            searchContainer.insertBefore(searchInput, searchContainer.firstChild);
-        }
 
-        // Initialize search after page load
-        window.addEventListener('load', createMenuSearch);
-
-        // Add typing effect to hero title
-        function typeWriter(element, text, speed = 100) {
-            let i = 0;
-            element.textContent = '';
-            
-            function type() {
-                if (i < text.length) {
-                    element.textContent += text.charAt(i);
-                    i++;
-                    setTimeout(type, speed);
-                }
+        searchInput.addEventListener('input', (e) => {
+          const searchTerm = e.target.value.toLowerCase();
+          menuCards.forEach((card) => {
+            const menuName = card.querySelector('h3').textContent.toLowerCase();
+            if (menuName.includes(searchTerm)) {
+              card.style.display = 'block';
+            } else {
+              card.style.display = 'none';
             }
-            type();
-        }
-
-        // Apply typing effect
-        window.addEventListener('load', () => {
-            const heroTitle = document.querySelector('.hero h1');
-            if (heroTitle) {
-                const originalText = heroTitle.textContent;
-                typeWriter(heroTitle, originalText, 150);
-            }
+          });
         });
 
-        // Add loading indicator
-        function addLoadingIndicator() {
-            const loader = document.createElement('div');
-            loader.style.cssText = `
+        searchContainer.insertBefore(searchInput, searchContainer.firstChild);
+      }
+
+      // Initialize search after page load
+      window.addEventListener('load', createMenuSearch);
+
+      // Add typing effect to hero title
+      function typeWriter(element, text, speed = 100) {
+        let i = 0;
+        element.textContent = '';
+
+        function type() {
+          if (i < text.length) {
+            element.textContent += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+          }
+        }
+        type();
+      }
+
+      // Apply typing effect
+      window.addEventListener('load', () => {
+        const heroTitle = document.querySelector('.hero h1');
+        if (heroTitle) {
+          const originalText = heroTitle.textContent;
+          typeWriter(heroTitle, originalText, 150);
+        }
+      });
+
+      // Add loading indicator
+      function addLoadingIndicator() {
+        const loader = document.createElement('div');
+        loader.style.cssText = `
                 position: fixed;
                 top: 0;
                 left: 0;
@@ -1306,21 +1391,21 @@
                 font-size: 2rem;
                 transition: opacity 0.5s ease;
             `;
-            loader.innerHTML = '🥟 JAW Dimsum Loading...';
-            document.body.appendChild(loader);
-            
-            window.addEventListener('load', () => {
-                setTimeout(() => {
-                    loader.style.opacity = '0';
-                    setTimeout(() => {
-                        loader.remove();
-                    }, 500);
-                }, 1000);
-            });
-        }
+        loader.innerHTML = '🥟 JAW Dimsum Loading...';
+        document.body.appendChild(loader);
 
-        // Initialize loading indicator
-        addLoadingIndicator();
+        window.addEventListener('load', () => {
+          setTimeout(() => {
+            loader.style.opacity = '0';
+            setTimeout(() => {
+              loader.remove();
+            }, 500);
+          }, 1000);
+        });
+      }
+
+      // Initialize loading indicator
+      addLoadingIndicator();
     </script>
-</body>
+  </body>
 </html>
